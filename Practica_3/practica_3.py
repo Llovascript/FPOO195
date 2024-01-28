@@ -29,6 +29,7 @@ for i in range(1, num+1):
     print(sum)
 """
 
+"""
 #4.-contador de letras
 
 nombre = input("Ingresa tu nombre: ")
@@ -37,3 +38,27 @@ nombre_mayu = nombre.upper()
 numero_letras = len(nombre_mayu)
 
 print("Nombre en mayúsculas:", nombre_mayu," Número de letras:", numero_letras)
+"""
+
+"""
+#5.-peso total del paquete
+
+num_payasos = int(input("Ingrese el número de payasos vendidos: "))
+num_munecas = int(input("Ingrese el número de muñecas vendidas: "))
+
+peso_payaso = 112
+peso_muneca = 75
+
+peso_total = (num_payasos * peso_payaso) + (num_munecas * peso_muneca)
+
+print("El peso total del paquete es:", peso_total, "gramos")
+"""
+
+
+#6.- frase invertida
+
+palabra = input("Ingresa una palabra: ")
+
+palabra_invertida = palabra[::-1]
+
+print("La palabra invertida es:", palabra_invertida)
