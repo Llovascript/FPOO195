@@ -7,6 +7,7 @@ for i in range(1, num + 1):
     if i % 2 != 0:
         print(i,end=", ")
 """
+
 """
 #2.-cuenta regresiva
 num = int(input("Ingresa tu número: "))
@@ -31,7 +32,6 @@ for i in range(1, num+1, 2):
     print("")
 """
 
-
 """
 #5.-palabra y letra que se repite en la misma
 word = input("Ingresa una palabra: ")
@@ -42,6 +42,7 @@ for char in word:
         count += 1
 print(f"La letra '{letter}' se repite {count} veces en la palabra '{word}'.")
 """
+
 
 """
 #6.-Deposito y retiro de un banco y saldo final
@@ -62,6 +63,9 @@ for _ in range(transacciones):
 
 print(f"El saldo final es: {saldo}")
 """
+
+
+
 #7.-arbol de navidad con ciclo while
 num_filas = int(input("Ingrese el número de filas del árbol de Navidad: "))
 fila = 1
