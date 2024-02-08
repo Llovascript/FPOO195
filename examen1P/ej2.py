@@ -1,0 +1,1 @@
+#escribir un programa que visualice en pantalla los numeros multiplos de 10 complendidos entre 10 y 1000
