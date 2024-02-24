@@ -15,14 +15,3 @@ class Personaje:
     def lanzarGranada(self):
         print(self.nombre+" pego una granada")
         
-    def recargarArma(self, municion):
-        cargador=25
-        cargador=cargador+municion
-        print("arma recargada"+str(cargador)+"%")
-
-#creamos el obj de la clase personaje
-Spartan= Personaje()
-
-print(Spartan.nombre)
-print(Spartan.especie)
-print(Spartan.altura)        
