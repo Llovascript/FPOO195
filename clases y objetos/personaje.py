@@ -14,4 +14,3 @@ class Personaje:
             
     def lanzarGranada(self):
         print(self.nombre+" pego una granada")
-        
