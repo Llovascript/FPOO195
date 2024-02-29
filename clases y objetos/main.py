@@ -20,15 +20,15 @@ Nemesis = Personaje(especieN,nombreN,alturaN)
 arma=armas()
 
 print("====El obj Spartan contine====")
-print(Spartan.nombre)
-print(Spartan.especie)
-print(Spartan.altura)        
+print(Spartan.get__nombre())
+print(Spartan.get__especie())
+print(Spartan.get__altura())        
 print("")
 
 print("====El obj Villano contine====")
-print(Nemesis.nombre)
-print(Nemesis.especie)
-print(Nemesis.altura) 
+print(Nemesis.get__nombre())
+print(Nemesis.get__especie())
+print(Nemesis.get__altura()) 
 print("")
 
 #usamos los metodos del spartan
@@ -43,5 +43,10 @@ Nemesis.lanzarGranada()
 print("")
 
 #usamos metodos del arma
-arma.seleccionarArma(Spartan.nombre)
+arma.seleccionarArma(Spartan.get__nombre())
 arma.recargarArma(65)
+print("")
+
+arma.seleccionarArma(Nemesis.get__nombre())
+arma.recargarArma(65)
+print("")
