@@ -1,4 +1,5 @@
 #clase solicitante de nombre, apellido paterno, apellido materno, anio de nac, carrera
+#generador de matricula
 import string
 import random
 
@@ -17,5 +18,13 @@ class Matricula:
         digitos=''.join(random.choice(characters) for _ in range(self.long) )
         return digitos
  
+
+    def datos(self):
+        self.nac = input("Año de Nacimiento: ")
+        self.nombre = input("Nombre: ")
+        self.apellidoP = input("Apellido paterno")
+        self.apellidoM = input("Apellido materno")
+        self.Carrera= input("Nombre de carrera")
+
 
     
