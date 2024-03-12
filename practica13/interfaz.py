@@ -1,4 +1,4 @@
-from tkinter import Tk, messagebox, Label, Entry, BooleanVar, Checkbutton, Button, Frame
+from tkinter import Tk, messagebox, Label, Entry, BooleanVar, Checkbutton, Button
 from contraRand import Contraseña
 
 def genera_password():
