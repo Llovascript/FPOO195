@@ -1,5 +1,4 @@
-from tkinter import Tk, ttk, Frame, Button, Label, Entry, messagebox
-import sys
+from tkinter import Tk, ttk, Button, Label, Entry, messagebox
 from banco import Cta
 
 
@@ -51,7 +50,24 @@ def retiro_efectivo():
     Titular = entrada_titular_retiro.get()
     cantidad = float(entrada_cantidad_retiro.get())
     objCta.retiro(NoCta, Titular, cantidad)
-    messagebox.showinfo("Retiro de efectivo", f"Retiro exitoso de: {cantidad} pesos")
+    if cantidad > objCta.ConsultaSaldo(NoCta, Titular):
+        messagebox.showwarning("Retiro de efectivo", "No hay saldo suficiente")
+    else:
+        messagebox.showinfo("Retiro de efectivo", f"Retiro exitoso de: {cantidad} pesos")
+    
+def transferencia_a_otra():
+    print("Transferencia de dinero")
+    NoCta_origen = entrada_cuenta_egreso.get()
+    Titular_origen = entrada_titular_egreso.get()
+    NoCta_destino = entrada_cuenta_egreso.get()  
+    cantidad = float(entrada_cantidad_transferencia.get())
+    exito, mensaje = objCta.transferencia(NoCta_origen, Titular_origen, NoCta_destino, cantidad)
+    if exito:
+        messagebox.showinfo("Transferencia", mensaje)
+    else:
+        messagebox.showerror("Error en la transferencia", mensaje)
+
+
 
 # Contenido de la pestaña "Registro de usuarios"
 etiqueta_no_cuenta = Label(tab1, text="Numero de cuenta:")
@@ -109,6 +125,31 @@ entrada_cantidad_retiro.grid(row=2, column=1)
 
 boton_retiro_efectivo = Button(tab3, text="Retiro de efectivo", command=retiro_efectivo)
 boton_retiro_efectivo.grid(row=3, columnspan=2)
+
+#contenidp de la pestaña "Deposito y transferencias"
+cuenta_egreso = Label(tab4, text="Cuenta de salida de transferencia: ")
+cuenta_egreso.grid(row=0, column=0)
+entrada_cuenta_egreso= Entry(tab4)
+entrada_cuenta_egreso.grid(row=0, column=1)
+
+titular_egreso = Label(tab4, text="Titular de la cuenta: ")
+titular_egreso.grid(row=1, column=0)
+entrada_titular_egreso = Entry(tab4)
+entrada_titular_egreso.grid(row=1, column=1)
+
+cuenta_ingreso = Label(tab4, text="Cuenta de entrada de transferencia: ")
+cuenta_ingreso.grid(row=2, column=0)
+entrada_cuenta_egreso= Entry(tab4)
+entrada_cuenta_egreso.grid(row=2, column=1)
+
+cantidad_transferencia = Label(tab4, text="cantiodad de transferencia: ")
+cantidad_transferencia.grid(row=3, column=0)
+entrada_cantidad_transferencia= Entry(tab4)
+entrada_cantidad_transferencia.grid(row=3, column=1)
+
+boton_transferencia = Button(tab4, text="realiza transferencia", command=transferencia_a_otra)
+boton_transferencia.grid(row=4, columnspan=2)
+
 
 # Bucle principal de la interfaz de usuario
 ventana.mainloop()

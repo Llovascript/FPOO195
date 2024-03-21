@@ -27,8 +27,31 @@ class Cta:
                 else:
                     return "saldo insuficiente para retirar"
         return "titular o numero de cuenta inexistente"
+    #def deposito(self, NoCta, Titular, cantidad):
+        #for cuenta in self.__lista:
+           # if cuenta["No. Cuenta: "] == NoCta and cuenta["Titular:"] == Titular:
+               # cuenta['Saldo: '] += cantidad
+               # return cuenta['Saldo: ']
             
-    #deposito a otra cuenta
+    #transferencia a otra cuenta
+    def transferencia(self, NoCta_origen, Titular_origen, NoCta_destino, Titular_destino, cantidad):
+        saldo_origen = self.ConsultaSaldo(NoCta_origen, Titular_origen)
+        saldo_destino = self.ConsultaSaldo(NoCta_destino, Titular_destino) 
+        if saldo_origen is not None and saldo_destino is not None:
+            if saldo_origen >= cantidad:
+                for cuenta in self.__lista:
+                    if cuenta["No. Cuenta: "] == NoCta_origen and cuenta["Titular:"] == Titular_origen:
+                        cuenta['Saldo: '] -= cantidad
+                    elif cuenta["No. Cuenta: "] == NoCta_destino and cuenta["Titular:"] == Titular_destino:  
+                        cuenta['Saldo: '] += cantidad
+                return True, "Transferencia exitosa"
+            else:
+                return False, "Saldo insuficiente en la cuenta de origen"
+        else:
+            return False, "No se encontraron una o ambas cuentas"
+
+
+        
 
                 
                 
