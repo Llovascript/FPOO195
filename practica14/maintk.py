@@ -59,13 +59,15 @@ def transferencia_a_otra():
     print("Transferencia de dinero")
     NoCta_origen = entrada_cuenta_egreso.get()
     Titular_origen = entrada_titular_egreso.get()
-    NoCta_destino = entrada_cuenta_egreso.get()  
+    NoCta_destino = entrada_cuenta_ingreso.get()  
+    Titular_destino = entrada_titular_ingreso.get() 
     cantidad = float(entrada_cantidad_transferencia.get())
-    exito, mensaje = objCta.transferencia(NoCta_origen, Titular_origen, NoCta_destino, 'Titular_destino', cantidad)
+    exito, mensaje = objCta.transferencia(NoCta_origen, Titular_origen, NoCta_destino, Titular_destino, cantidad)  # Corregir aquí
     if exito:
         messagebox.showinfo("Transferencia", mensaje)
     else:
         messagebox.showerror("Error en la transferencia", mensaje)
+
 
 
 
@@ -137,18 +139,23 @@ titular_egreso.grid(row=1, column=0)
 entrada_titular_egreso = Entry(tab4)
 entrada_titular_egreso.grid(row=1, column=1)
 
-cuenta_ingreso = Label(tab4, text="Cuenta de entrada de transferencia: ")
+cuenta_ingreso = Label(tab4, text="Cuenta de entrada de transferencia: ")  
 cuenta_ingreso.grid(row=2, column=0)
-entrada_cuenta_egreso= Entry(tab4)
-entrada_cuenta_egreso.grid(row=2, column=1)
+entrada_cuenta_ingreso = Entry(tab4)  
+entrada_cuenta_ingreso.grid(row=2, column=1)
+
+titular_ingreso = Label(tab4, text="Titular de la cuenta de entrada: ")  
+titular_ingreso.grid(row=3, column=0)  
+entrada_titular_ingreso = Entry(tab4)  
+entrada_titular_ingreso.grid(row=3, column=1) 
 
 cantidad_transferencia = Label(tab4, text="cantidad de transferencia: ")
-cantidad_transferencia.grid(row=3, column=0)
+cantidad_transferencia.grid(row=4, column=0)
 entrada_cantidad_transferencia= Entry(tab4)
-entrada_cantidad_transferencia.grid(row=3, column=1)
+entrada_cantidad_transferencia.grid(row=4, column=1)
 
 boton_transferencia = Button(tab4, text="realiza transferencia", command=transferencia_a_otra)
-boton_transferencia.grid(row=4, columnspan=2)
+boton_transferencia.grid(row=5, columnspan=2)
 
 
 # Bucle principal de la interfaz de usuario
