@@ -61,7 +61,7 @@ def transferencia_a_otra():
     Titular_origen = entrada_titular_egreso.get()
     NoCta_destino = entrada_cuenta_egreso.get()  
     cantidad = float(entrada_cantidad_transferencia.get())
-    exito, mensaje = objCta.transferencia(NoCta_origen, Titular_origen, NoCta_destino, cantidad)
+    exito, mensaje = objCta.transferencia(NoCta_origen, Titular_origen, NoCta_destino, 'Titular_destino', cantidad)
     if exito:
         messagebox.showinfo("Transferencia", mensaje)
     else:
@@ -142,7 +142,7 @@ cuenta_ingreso.grid(row=2, column=0)
 entrada_cuenta_egreso= Entry(tab4)
 entrada_cuenta_egreso.grid(row=2, column=1)
 
-cantidad_transferencia = Label(tab4, text="cantiodad de transferencia: ")
+cantidad_transferencia = Label(tab4, text="cantidad de transferencia: ")
 cantidad_transferencia.grid(row=3, column=0)
 entrada_cantidad_transferencia= Entry(tab4)
 entrada_cantidad_transferencia.grid(row=3, column=1)
