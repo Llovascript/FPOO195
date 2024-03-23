@@ -1,6 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk
+from Controlador import *
+
+objControlador=Controlador()
+
+def ejecutaInsert():
+    objControlador.insertUsuario(var1.get(), var2.get(), var3.get())
 
 #1.
 ventana= Tk()
@@ -40,6 +46,6 @@ var3 = tk.StringVar()
 Label(tab1, text="Password: ").pack()
 Entry(tab1, textvariable=var3).pack()
 
-Button(tab1, text="Guardar usuario").pack()
+Button(tab1, text="Guardar usuario", command=ejecutaInsert).pack()
 
 ventana.mainloop()
