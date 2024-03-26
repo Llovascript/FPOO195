@@ -2,11 +2,19 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from Controlador import *
-
+ 
 objControlador=Controlador()
 
 def ejecutaInsert():
     objControlador.insertUsuario(var1.get(), var2.get(), var3.get())
+    
+def busUsuario():
+    usuarioBD=objControlador.buscarUsuario(varBus.get())
+    if usuarioBD == []:
+        messagebox.showwarning("pelaste", "id no existe en BD")
+    else:
+        consulta.delete(1.0, END)
+        consulta.insert(END, usuarioBD)
 
 #1.
 ventana= Tk()
@@ -47,5 +55,19 @@ Label(tab1, text="Password: ").pack()
 Entry(tab1, textvariable=var3).pack()
 
 Button(tab1, text="Guardar usuario", command=ejecutaInsert).pack()
+
+#6
+Label(tab2, text="Buscar usuarios", fg="red", font=("Mono",18)).pack()
+
+varBus = tk.StringVar()
+Label(tab2, text="Id: ").pack()
+Entry(tab2, textvariable=varBus).pack()
+
+Button(tab2, text="Buscar usuario", command=busUsuario).pack()
+
+Label(tab2, text="Registrado:", fg="blue", font=("Mono",16)).pack()
+consulta = Text(tab2, height=5, width=52)
+consulta.pack()
+
 
 ventana.mainloop()
