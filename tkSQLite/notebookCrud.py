@@ -14,7 +14,7 @@ ventana.title("CRUD de usuarios")
 ventana.geometry("500x300")
 
 #2.
-panel = ttk.Notebook(ventana)
+panel = ttk.Notebook(ventana)   
 panel.pack(fill="both", expand="yes")
 
 #3.
