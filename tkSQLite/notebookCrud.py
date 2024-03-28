@@ -16,6 +16,19 @@ def busUsuario():
         consulta.delete(1.0, END)
         consulta.insert(END, usuarioBD)
 
+def busUsuarios():
+    usuarios = objControlador.usuariosListaBD()
+    user.delete(*user.get_children())
+    for usuario in usuarios:
+        user.insert("", "end", values=usuario)
+    
+        
+def Change(event):
+    tabChange = event.widget.select()
+    tabtext = event.widget.tab(tabChange, "text")
+    if tabtext == "Consultar usuarios":
+        print("Consultar usuarios tab selected!")
+        busUsuarios()
 #1.
 ventana= Tk()
 ventana.title("CRUD de usuarios")
@@ -68,6 +81,21 @@ Button(tab2, text="Buscar usuario", command=busUsuario).pack()
 Label(tab2, text="Registrado:", fg="blue", font=("Mono",16)).pack()
 consulta = Text(tab2, height=5, width=52)
 consulta.pack()
+
+#7 lista de usuarios registrados en BD
+Label(tab3, text="Lista de usuarios en BD", fg="black", font=("Mono",18)).pack()
+user = ttk.Treeview(tab3, columns=("id", "nombre", "correo"), show="headings")
+user.heading("id", text="ID")
+user.heading("nombre", text="Nombre")
+user.heading("correo", text="Correo")
+
+user.column("id", width=50)
+user.column("nombre", width=150)
+user.column("correo", width=200)
+
+user.pack()
+
+panel.bind("<<NotebookTabChanged>>", Change)
 
 
 ventana.mainloop()
