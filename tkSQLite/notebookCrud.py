@@ -2,8 +2,11 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from Controlador import *
+from GeneradorPDF import *
+import os
  
 objControlador=Controlador()
+objPDF = GeneradorPDF()
 
 def ejecutaInsert():
     objControlador.insertUsuario(var1.get(), var2.get(), var3.get())
@@ -29,10 +32,23 @@ def Change(event):
     if tabtext == "Consultar usuarios":
         print("Consultar usuarios tab selected!")
         busUsuarios()
+        
+def ejecutaPDF():
+    if varTitulo == []:
+        messagebox.showwarning("Importante", "Escribe un nombre al PDF tibio")
+    else:
+        objPDF.add_page()
+        objPDF.chapter_body()
+        objPDF.output(varTitulo.get()+".pdf")
+        rutaPDF="C:/Users/Lenovo/OneDrive/Documentos/GitHub/FPOO195/"+varTitulo.get()+".pdf"
+        messagebox.showinfo("Archivo creado", "PDF disponible en carpeta")
+        os.system(f"start {rutaPDF}")
+
+
 #1.
 ventana= Tk()
 ventana.title("CRUD de usuarios")
-ventana.geometry("500x300")
+ventana.geometry("600x300")
 
 #2.
 panel = ttk.Notebook(ventana)   
@@ -44,6 +60,7 @@ tab2 = ttk.Frame(panel)
 tab3 = ttk.Frame(panel)
 tab4 = ttk.Frame(panel)
 tab5 = ttk.Frame(panel)
+tab6 = ttk.Frame(panel)
 
 #4. agregar pestanas
 panel.add(tab1, text="Agregar usuario")
@@ -51,6 +68,7 @@ panel.add(tab2, text="Buscar Usuario")
 panel.add(tab3, text="Consultar usuarios")
 panel.add(tab4, text="Editar Usuario")
 panel.add(tab5, text="Eliminar usuario")
+panel.add(tab6, text="Reportes en PDF")
 
 #5. pestana 1: Formulario insert
 Label(tab1, text="Regristo de usuarios", fg="black", font=("Modern",18)).pack()
@@ -96,6 +114,23 @@ user.column("correo", width=200)
 user.pack()
 
 panel.bind("<<NotebookTabChanged>>", Change)
+
+#8 editar usuario
+
+
+
+#9 eliminar usuario
+
+
+
+#10generadorPDF
+Label(tab6, text="Usuarios en PDF", fg="black", font=("Mono",18)).pack()
+
+varTitulo = tk.StringVar()
+Label(tab6, text="Titulo: ").pack()
+Entry(tab6, textvariable=varTitulo).pack()
+
+Button(tab6, text="Generar PDF", command=ejecutaPDF).pack()
 
 
 ventana.mainloop()
