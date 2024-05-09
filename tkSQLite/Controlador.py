@@ -63,3 +63,45 @@ class Controlador:
             return usuarios
         except sqlite3.OperationalError:
             print("No se pudo ejecutar la busqueda")
+            
+            
+    def buscarUsuarioNom(self, nombre):
+        conex=self.conexion()
+        if(nombre == ''):
+            messagebox.showwarning("Cuidado", "inputs vacios no sea tibio")
+            conex.close()
+        else:
+            try:
+                cursor=conex.cursor()
+                sqlSelect="select * from tbUsuarios where id="+nombre
+                cursor.execute(sqlSelect)
+                usuario= cursor.fetchall()
+                conex.close()
+                return usuario
+            except sqlite3.OperationalError:
+                print("No se pudo ejecutar la busqueda")
+            
+    def editarUsuario(self, nombreActual, nuevoNombre, nuevoCorreo, nuevaContra):
+        conexion = self.conexion()
+        cursor = conexion.cursor()
+        try:
+            conH = self.encriptapass(nuevaContra)
+            cursor.execute("UPDATE tbUsuarios SET nombre=?, correo=?, password=? WHERE nombre=?",
+                        (nuevoNombre, nuevoCorreo, conH, nombreActual))
+            conexion.commit()
+            messagebox.showinfo("Exito", "Usuario actualizado correctamente.")
+        except sqlite3.Error as e:
+            messagebox.showerror("Error", "Error al editar usuario: " + str(e))
+            
+    def eliminarUsuario(self, nombreEliminar):
+        conexion = self.conexion()
+        cursor = conexion.cursor()
+        try:
+            cursor.execute("DELETE FROM tbUsuarios WHERE nombre=?", (nombreEliminar,))
+            if cursor.rowcount > 0:
+                messagebox.showinfo("Exito", f"Usuario '{nombreEliminar}' eliminado correctamente.")
+            else:
+                messagebox.showwarning("Advertencia", f"No se encontró el usuario '{nombreEliminar}'.")
+            conexion.commit()
+        except sqlite3.Error as e:
+            messagebox.showerror("Error", "Error al eliminar usuario: " + str(e))

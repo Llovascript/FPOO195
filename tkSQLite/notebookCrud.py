@@ -44,6 +44,19 @@ def ejecutaPDF():
         messagebox.showinfo("Archivo creado", "PDF disponible en carpeta")
         os.system(f"start {rutaPDF}")
 
+def ejecutaEditar():
+    nombreActual = varEditNombre.get()
+    nuevoNombre = varNuevoNombre.get()
+    nuevoCorreo = varNuevoCorreo.get()
+    nuevaContra = varNuevaContra.get()
+    objControlador.editarUsuario(nombreActual, nuevoNombre, nuevoCorreo, nuevaContra)
+    
+def ejecutaEliminar():
+    nombreEliminar = varEliminarNombre.get()
+    confirmacion = messagebox.askyesno("Confirmar Eliminación", f"¿Estás seguro de eliminar al usuario '{nombreEliminar}'?")
+    if confirmacion:
+        objControlador.eliminarUsuario(nombreEliminar) 
+        
 
 #1.
 ventana= Tk()
@@ -116,11 +129,33 @@ user.pack()
 panel.bind("<<NotebookTabChanged>>", Change)
 
 #8 editar usuario
+Label(tab4, text="Editar Usuario", fg="black", font=("Mono", 18)).pack()
 
+varEditNombre = tk.StringVar()
+Label(tab4, text="Nombre Actual: ").pack()
+Entry(tab4, textvariable=varEditNombre).pack()
 
+varNuevoNombre = tk.StringVar()
+Label(tab4, text="Nuevo Nombre: ").pack()
+Entry(tab4, textvariable=varNuevoNombre).pack()
+
+varNuevoCorreo = tk.StringVar()
+Label(tab4, text="Nuevo Correo: ").pack()
+Entry(tab4, textvariable=varNuevoCorreo).pack()
+
+varNuevaContra = tk.StringVar()
+Label(tab4, text="Nueva Contraseña: ").pack()
+Entry(tab4, textvariable=varNuevaContra).pack()
+
+Button(tab4, text="Editar usuario", command=ejecutaEditar).pack()
 
 #9 eliminar usuario
+Label(tab5, text="Eliminar Usuario", fg="black", font=("Mono", 18)).pack()
 
+varEliminarNombre = tk.StringVar()
+Label(tab5, text="Nombre del Usuario a Eliminar: ").pack()
+Entry(tab5, textvariable=varEliminarNombre).pack()
+Button(tab5, text="Eliminar Usuario", command=ejecutaEliminar).pack()
 
 
 #10generadorPDF
@@ -133,4 +168,4 @@ Entry(tab6, textvariable=varTitulo).pack()
 Button(tab6, text="Generar PDF", command=ejecutaPDF).pack()
 
 
-ventana.mainloop()
+ventana.mainloop()   
